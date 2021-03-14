@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Etch-a-Sketch</title>
+    <link rel="stylesheet" type="text/css" href="Etch-a-Sketch.css">
+    <script type="text/javascript" src="app.js"></script>
+</head>
+
+<body>
+    <button onclick="makeMatrix()">Matrix Size</button>
+    <button onclick="reset()">Reset</button>
+    <div id="grid-container">
+    </div>
+</body>
+
+<script>
+    const container = document.getElementById("grid-container");
+
+    function makeMatrix() {
+        reset();
+        let size = prompt("Please enter size of Matrix.")
+
+        container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+        
+        for (i = 0; i < size * size; i++) {
+            let cell = document.createElement("div");
+            container.appendChild(cell).className = "grid-item";
+        };
+        document.querySelectorAll(".grid-item").forEach(item => {
+            item.addEventListener("mouseover", event => {
+                item.classList.add("hover");
+            });
+        });
+    };
+
+    function reset(){
+        document.querySelectorAll(".grid-item").forEach(item => {
+            item.classList.remove("hover");
+        });
+    };
+
+</script>
